@@ -1,0 +1,43 @@
+<h1>Flight Details</h1>
+
+<div>
+    <p>Airline: <%= flight.airline %></p>
+    <p>Airport: <%= flight.airport %></p>
+    <p>Flight No: <%= flight.flightNo %></p>
+    <p>Departure: <%= flight.departs.toLocaleString() %></p>
+
+    <h2>Destinations</h2>
+    <ul>
+        <% flight.destinations.forEach(destination => { %>
+            <li>
+                Airport: <%= destination.airport %><br>
+                Arrival: <%= destination.arrival.toLocaleString() %>
+            </li>
+        <% }); %>
+    </ul>
+
+    <!-- Form to add a new destination -->
+    <h2>Add Destination</h2>
+    <form action="/flights/<%= flight._id %>/add-destination" method="POST">
+        <label for="airport">Airport:</label>
+        <input type="text" id="airport" name="airport" required>
+
+        <label for="arrival">Arrival:</label>
+        <input type="datetime-local" id="arrival" name="arrival" required>
+
+        <button type="submit">Add Destination</button>
+    </form>
+
+    <h2>Tickets</h2>
+    <ul>
+        <% tickets.forEach(ticket => { %>
+            <li>
+                Seat: <%= ticket.seat %><br>
+                Price: <%= ticket.price %>
+            </li>
+        <% }); %>
+    </ul>
+
+    <!-- Link to create a new ticket -->
+    <a href="/flights/<%= flight._id %>/tickets/new">New Ticket</a>
+</div>
